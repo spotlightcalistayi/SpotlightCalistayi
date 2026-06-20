@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Başvurunuz Alındı | Spotlight Çalıştayı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#161413;
+    --red:#8e1a1a;
+    --red-bright:#b8232b;
+    --gold:#d4af37;
+    --gold-soft:#e8cf86;
+    --parchment:#f4e8c1;
+    --line:#3a3531;
+    --ink:#efe6d2;
+    --muted:#a89c87;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; height:100%;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  body{
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(142,26,26,0.22), transparent 45%),
+      radial-gradient(circle at 80% 90%, rgba(212,175,55,0.12), transparent 40%);
+    padding:32px;
+  }
+  .card{ max-width:480px; }
+  .reel{ width:110px; height:110px; margin:0 auto 18px; }
+  .reel svg{ width:100%; height:100%; }
+  h1{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:3px;
+    font-size:32px;
+    color:var(--gold);
+    margin:0 0 12px;
+  }
+  p{
+    font-size:15px;
+    line-height:1.8;
+    color:var(--muted);
+    margin:0 0 26px;
+  }
+  a.back{
+    display:inline-block;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:2px;
+    font-size:15px;
+    color:#161413;
+    background:var(--gold);
+    border-radius:4px;
+    padding:13px 30px;
+    text-decoration:none;
+    transition:background .2s ease;
+  }
+  a.back:hover{ background:var(--gold-soft); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="reel">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#8e1a1a" stroke-width="3" opacity="0.5"/>
+        <circle cx="60" cy="60" r="48" fill="#8e1a1a" opacity="0.9"/>
+        <circle cx="60" cy="60" r="10" fill="#161413"/>
+        <circle cx="60" cy="32" r="11" fill="#161413"/>
+        <circle cx="86" cy="48" r="11" fill="#161413"/>
+        <circle cx="86" cy="76" r="11" fill="#161413"/>
+        <circle cx="60" cy="92" r="11" fill="#161413"/>
+        <circle cx="34" cy="76" r="11" fill="#161413"/>
+        <circle cx="34" cy="48" r="11" fill="#161413"/>
+      </svg>
+    </div>
+    <h1>BAŞVURUNUZ ALINDI 🎬</h1>
+    <p>Spotlight Çalıştayı'na başvurduğunuz için teşekkür ederiz. Ekibimiz başvurunuzu inceleyip en kısa sürede sizinle iletişime geçecek.</p>
+    <a class="back" href="index.html">FORMA GERİ DÖN</a>
+  </div>
+</body>
+</html>
