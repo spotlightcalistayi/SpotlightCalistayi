@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotlight Çalıştayı | Başvuru Formu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#161413;
+    --panel:#0e0c0b;
+    --red:#8e1a1a;
+    --red-bright:#b8232b;
+    --gold:#d4af37;
+    --gold-soft:#e8cf86;
+    --parchment:#f4e8c1;
+    --line:#3a3531;
+    --ink:#efe6d2;
+    --muted:#a89c87;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Poppins',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(142,26,26,0.18), transparent 45%),
+      radial-gradient(circle at 80% 90%, rgba(212,175,55,0.10), transparent 40%);
+  }
+
+  /* film strip border */
+  .filmstrip{
+    position:fixed;
+    top:0;
+    bottom:0;
+    width:34px;
+    background:#0a0908;
+    z-index:50;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    padding:18px 0;
+  }
+  .filmstrip.left{left:0; border-right:1px solid var(--line);}
+  .filmstrip.right{right:0; border-left:1px solid var(--line);}
+  .sprocket{
+    width:14px;
+    height:14px;
+    border-radius:3px;
+    background:var(--bg);
+    box-shadow: inset 0 0 0 1px rgba(212,175,55,0.15);
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:64px 46px 90px;
+  }
+
+  /* header */
+  header{
+    text-align:center;
+    margin-bottom:18px;
+  }
+
+  .reel-mark{
+    width:120px;
+    height:120px;
+    margin:0 auto 6px;
+    position:relative;
+  }
+  .reel-mark svg{ width:100%; height:100%; animation: spin 16s linear infinite; }
+  @media (prefers-reduced-motion: reduce){ .reel-mark svg{ animation:none; } }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  .brand-word{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:54px;
+    letter-spacing:6px;
+    color:var(--gold);
+    margin:8px 0 0;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.4);
+  }
+  .brand-sub{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:20px;
+    letter-spacing:10px;
+    color:var(--parchment);
+    margin:2px 0 0;
+    opacity:0.85;
+  }
+
+  .tagline{
+    margin:22px auto 0;
+    max-width:560px;
+    font-size:14.5px;
+    line-height:1.85;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:40px 0 36px;
+  }
+  .divider::before,.divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+  .divider span{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:4px;
+    font-size:13px;
+    color:var(--gold-soft);
+    white-space:nowrap;
+  }
+
+  /* clapper notice for akademi */
+  .clapper{
+    border:1px solid var(--line);
+    background:
+      repeating-linear-gradient(135deg, #1c1816, #1c1816 14px, #100e0d 14px, #100e0d 28px);
+    border-radius:4px;
+    padding:22px 26px;
+    margin-bottom:46px;
+    position:relative;
+    overflow:hidden;
+  }
+  .clapper::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:10px;
+    background: repeating-linear-gradient(135deg, var(--gold) 0 14px, #1c1816 14px 28px);
+    opacity:0.9;
+  }
+  .clapper-title{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:3px;
+    font-size:22px;
+    color:var(--parchment);
+    margin:14px 0 6px;
+  }
+  .clapper-body{
+    font-size:14px;
+    line-height:1.7;
+    color:var(--muted);
+    margin:0;
+  }
+  .clapper-body b{ color:var(--gold-soft); font-weight:600; }
+
+  /* form sections */
+  .frame{
+    border:1px solid #4a443c;
+    background:var(--panel);
+    border-radius:8px;
+    padding:34px 28px 30px;
+    margin-bottom:34px;
+    position:relative;
+    box-shadow:
+      0 14px 30px -16px rgba(0,0,0,0.65),
+      inset 0 0 0 1px rgba(212,175,55,0.04);
+  }
+  .frame::before{
+    content:attr(data-num);
+    position:absolute;
+    top:-15px;
+    left:24px;
+    background:var(--gold);
+    color:#161413;
+    padding:4px 14px;
+    border-radius:3px;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:2px;
+    font-size:13px;
+    box-shadow:0 4px 10px -2px rgba(0,0,0,0.5);
+  }
+
+  label{
+    display:block;
+    font-size:15px;
+    font-weight:600;
+    color:var(--parchment);
+    margin-bottom:6px;
+  }
+  .hint{
+    display:block;
+    font-size:12.5px;
+    color:var(--muted);
+    font-weight:400;
+    margin-bottom:14px;
+  }
+  .req{ color:var(--red-bright); margin-left:4px; }
+
+  input[type=text],
+  input[type=email],
+  input[type=tel],
+  textarea{
+    width:100%;
+    background:#1b1815;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:13px 14px;
+    font-family:'Poppins',sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  textarea{ resize:vertical; min-height:120px; line-height:1.6; }
+  input::placeholder, textarea::placeholder{ color:#5e564a; }
+  input:focus, textarea:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(212,175,55,0.12);
+  }
+
+  .wordcount{
+    text-align:right;
+    font-size:11.5px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+  .wordcount.ok{ color:var(--gold-soft); }
+
+  /* radio groups */
+  .options{
+    display:grid;
+    gap:10px;
+  }
+  .opt{
+    position:relative;
+  }
+  .opt input{
+    position:absolute;
+    opacity:0;
+    width:100%;
+    height:100%;
+    left:0; top:0;
+    margin:0;
+    cursor:pointer;
+    z-index:2;
+  }
+  .opt .opt-face{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border:1px solid var(--line);
+    background:#1b1815;
+    border-radius:4px;
+    padding:13px 16px;
+    font-size:14.5px;
+    color:var(--ink);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .opt .dot{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    border:2px solid var(--muted);
+    flex:none;
+    position:relative;
+  }
+  .opt input:checked + .opt-face{
+    border-color:var(--gold);
+    background:rgba(212,175,55,0.07);
+  }
+  .opt input:checked + .opt-face .dot{
+    border-color:var(--gold);
+  }
+  .opt input:checked + .opt-face .dot::after{
+    content:"";
+    position:absolute;
+    inset:3px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+  .opt input:focus-visible + .opt-face{
+    box-shadow:0 0 0 3px rgba(212,175,55,0.18);
+  }
+
+  /* department grid - clapperboard chips */
+  .dept-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  @media (max-width:520px){
+    .dept-grid{ grid-template-columns:1fr; }
+  }
+  .dept-chip{ position:relative; }
+  .dept-chip input{
+    position:absolute;
+    opacity:0;
+    width:100%;
+    height:100%;
+    left:0; top:0;
+    margin:0;
+    cursor:pointer;
+    z-index:2;
+  }
+  .dept-face{
+    border:1px solid var(--line);
+    background:#1b1815;
+    border-radius:4px;
+    padding:16px 14px;
+    text-align:center;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:2px;
+    font-size:17px;
+    color:var(--ink);
+    transition:all .2s ease;
+  }
+  .dept-chip input:checked + .dept-face{
+    border-color:var(--red-bright);
+    background:linear-gradient(160deg, rgba(142,26,26,0.35), rgba(142,26,26,0.08));
+    color:var(--gold-soft);
+  }
+  .dept-chip input:focus-visible + .dept-face{
+    box-shadow:0 0 0 3px rgba(212,175,55,0.18);
+  }
+
+  /* submit */
+  .submit-row{
+    margin-top:34px;
+    text-align:center;
+  }
+  button.submit{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:3px;
+    font-size:18px;
+    color:#161413;
+    background:var(--gold);
+    border:none;
+    border-radius:4px;
+    padding:16px 46px;
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease;
+  }
+  button.submit:hover{ background:var(--gold-soft); transform:translateY(-1px); }
+  button.submit:active{ transform:translateY(0); }
+  .submit-note{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  /* footer / coordinators */
+  .coordinators{
+    margin-top:56px;
+    border-top:1px solid var(--line);
+    padding-top:30px;
+    text-align:center;
+  }
+  .coordinators h3{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:3px;
+    font-size:18px;
+    color:var(--gold-soft);
+    margin:0 0 18px;
+  }
+  .coord-list{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .coord{
+    font-size:13.5px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+  .coord b{
+    display:block;
+    color:var(--parchment);
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:2px;
+  }
+  .coord a{
+    color:var(--gold-soft);
+    text-decoration:none;
+    border-bottom:1px dotted var(--gold-soft);
+  }
+
+  .foot-mark{
+    text-align:center;
+    margin-top:40px;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:4px;
+    font-size:12px;
+    color:#5e564a;
+  }
+
+  @media (max-width:600px){
+    .wrap{ padding:54px 22px 70px; }
+    .brand-word{ font-size:40px; letter-spacing:4px; }
+    .filmstrip{ width:20px; }
+    .sprocket{ width:10px; height:10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="filmstrip left">
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+</div>
+<div class="filmstrip right">
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+  <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="reel-mark">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#8e1a1a" stroke-width="3" opacity="0.5"/>
+        <circle cx="60" cy="60" r="48" fill="#8e1a1a" opacity="0.9"/>
+        <circle cx="60" cy="60" r="10" fill="#161413"/>
+        <circle cx="60" cy="32" r="11" fill="#161413"/>
+        <circle cx="86" cy="48" r="11" fill="#161413"/>
+        <circle cx="86" cy="76" r="11" fill="#161413"/>
+        <circle cx="60" cy="92" r="11" fill="#161413"/>
+        <circle cx="34" cy="76" r="11" fill="#161413"/>
+        <circle cx="34" cy="48" r="11" fill="#161413"/>
+      </svg>
+    </div>
+    <p class="brand-word">SPOTLIGHT</p>
+    <p class="brand-sub">Ç A L I Ş T A Y I</p>
+    <p class="tagline">Sahne arkasından spot ışıklarına — ekibimize katılmak isteyenler için başvuru formu. Aşağıdaki bilgileri eksiksiz doldurun, sizinle en kısa sürede iletişime geçelim.</p>
+  </header>
+
+  <div class="clapper">
+    <p class="clapper-title">🎬 AKADEMİ BAŞVURULARIMIZ YAKINDA AÇILACAKTIR</p>
+    <p class="clapper-body">Spotlight Çalıştayı Akademi başvuruları için <b>kayıtlar çok yakında başlıyor.</b> Güncellemeler için bizi takipte kalın — sahneye çıkmaya hazır olun.</p>
+  </div>
+
+  <form id="spotlightForm" action="https://formspree.io/f/xeewywbk" method="POST">
+
+    <!-- Formspree: e-posta konu başlığı -->
+    <input type="hidden" name="_subject" value="Yeni Spotlight Çalıştayı Başvurusu">
+    <!-- Formspree: başarılı gönderimde yönlendirilecek sayfa -->
+    <input type="hidden" name="_next" value="thanks.html">
+    <!-- Bot koruması (gizli alan, insan kullanıcılar görmez/doldurmaz) -->
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+    <div class="divider"><span>KİŞİSEL BİLGİLER</span></div>
+
+    <div class="frame" data-num="01">
+      <label for="adsoyad">Adınız Soyadınız<span class="req">*</span></label>
+      <input type="text" id="adsoyad" name="Ad Soyad" placeholder="Yanıtınız" required>
+    </div>
+
+    <div class="frame" data-num="02">
+      <label for="telefon">Telefon Numaranız<span class="req">*</span></label>
+      <input type="tel" id="telefon" name="Telefon" placeholder="05XX XXX XX XX" required>
+    </div>
+
+    <div class="frame" data-num="03">
+      <label for="email">E-posta Adresiniz<span class="req">*</span></label>
+      <input type="email" id="email" name="_replyto" placeholder="Yanıtınız" required>
+    </div>
+
+    <div class="frame" data-num="04">
+      <label for="okul">Okulunuz<span class="req">*</span></label>
+      <span class="hint">Lütfen kısaltma kullanmayınız.</span>
+      <input type="text" id="okul" name="Okul" placeholder="Yanıtınız" required>
+    </div>
+
+    <div class="frame" data-num="05">
+      <label>Sınıfınız<span class="req">*</span></label>
+      <div class="options" id="sinifGroup">
+        <label class="opt"><input type="radio" name="Sınıf" value="Hazırlık" required><span class="opt-face"><span class="dot"></span>Hazırlık</span></label>
+        <label class="opt"><input type="radio" name="Sınıf" value="9"><span class="opt-face"><span class="dot"></span>9</span></label>
+        <label class="opt"><input type="radio" name="Sınıf" value="10"><span class="opt-face"><span class="dot"></span>10</span></label>
+        <label class="opt"><input type="radio" name="Sınıf" value="11"><span class="opt-face"><span class="dot"></span>11</span></label>
+        <label class="opt"><input type="radio" name="Sınıf" value="12"><span class="opt-face"><span class="dot"></span>12</span></label>
+      </div>
+    </div>
+
+    <div class="divider"><span>DEPARTMAN SEÇİMİ</span></div>
+
+    <div class="frame" data-num="06">
+      <label>Seçmek İstediğiniz Departman<span class="req">*</span></label>
+      <span class="hint">Yalnızca bir departman seçebilirsiniz.</span>
+      <div class="dept-grid" id="deptGroup">
+        <label class="dept-chip"><input type="radio" name="Departman" value="PR" required><span class="dept-face">PR</span></label>
+        <label class="dept-chip"><input type="radio" name="Departman" value="SAHA"><span class="dept-face">SAHA</span></label>
+        <label class="dept-chip"><input type="radio" name="Departman" value="IT"><span class="dept-face">IT</span></label>
+        <label class="dept-chip"><input type="radio" name="Departman" value="FİNANS"><span class="dept-face">FİNANS</span></label>
+      </div>
+    </div>
+
+    <div class="frame" data-num="07">
+      <label for="deneyim">Varsa Seçtiğiniz Alanda Önceki Deneyimleriniz<span class="req">*</span></label>
+      <textarea id="deneyim" name="Önceki Deneyim" placeholder="Yanıtınız" required></textarea>
+    </div>
+
+    <div class="frame" data-num="08">
+      <label for="motivasyon">Bu Alanı Seçme Motivasyonunuz<span class="req">*</span></label>
+      <span class="hint">En az 100 kelime yazınız.</span>
+      <textarea id="motivasyon" name="Motivasyon" placeholder="Yanıtınız" required oninput="checkWords()"></textarea>
+      <div class="wordcount" id="wordcount">0 / 100 kelime</div>
+    </div>
+
+    <div class="frame" data-num="09">
+      <label for="istek">Varsa Eklemek İstedikleriniz</label>
+      <textarea id="istek" name="Ek Notlar" placeholder="Yanıtınız"></textarea>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="submit" id="submitBtn">BAŞVURUYU GÖNDER</button>
+      <p class="submit-note">Formu gönderdiğinizde ekibimiz sizinle iletişime geçecektir.</p>
+    </div>
+
+  </form>
+
+  <div class="coordinators">
+    <h3>GENEL KOORDİNATÖR İLETİŞİM</h3>
+    <div class="coord-list">
+      <div class="coord">
+        <b>Aras Altunyay</b>
+        <a href="tel:05308843280">0530 884 32 80</a>
+      </div>
+      <div class="coord">
+        <b>Cemal Akman</b>
+        <a href="tel:05326921057">0532 692 10 57</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot-mark">SPOTLIGHT ÇALIŞTAYI — SAHNE SİZİN</p>
+
+</div>
+
+<script>
+  function checkWords(){
+    const text = document.getElementById('motivasyon').value.trim();
+    const count = text.length === 0 ? 0 : text.split(/\s+/).filter(Boolean).length;
+    const el = document.getElementById('wordcount');
+    el.textContent = count + ' / 100 kelime';
+    el.classList.toggle('ok', count >= 100);
+  }
+
+  // Form Formspree'ye gerçek bir POST ile gönderilir.
+  // Buradaki kontrol yalnızca eksik/geçersiz girdilerde gönderimi durdurur;
+  // her şey geçerliyse form normal şekilde Formspree'ye iletilir.
+  document.getElementById('spotlightForm').addEventListener('submit', function(e){
+    const text = document.getElementById('motivasyon').value.trim();
+    const count = text.length === 0 ? 0 : text.split(/\s+/).filter(Boolean).length;
+    if(count < 100){
+      e.preventDefault();
+      alert('Motivasyon paragrafı en az 100 kelime olmalıdır. Şu an: ' + count + ' kelime.');
+      document.getElementById('motivasyon').focus();
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'GÖNDERİLİYOR...';
+  });
+</script>
+
+</body>
+</html>
